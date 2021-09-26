@@ -24,3 +24,36 @@ The reducer function does the following: <br>
  * A key is considered derived only if the child key is separated from its parent value by a space. (Ex: "Marina Beach" is derived from "Marina" while "Marina-Beach" is not) <br>
  * This order is obtained dynamically. <br>
  
+ ### Run the program ###
+ To run the code locally on your system wihtout using hadoop, the following command can be used: <br>
+ ```
+ cat <path-to-json-file-dataset> | python3 mapper.py <co-ordinate1> <co-ordinate2> <distance> | sort -k 1,1 | python3 reducer.py
+ ```
+ _co-ordinate1, co-ordinate2_ and _distance_ are the command line arguments for the mapper file. <br><br>
+ To run the code on ***Hadoop HDFS*** on your local system: <br>
+1. Turn on ***Hadoop*** on your local system. <br>
+2. Create a directory within hdfs to store the dataset file. <br>
+```
+hdfs dfs -mkdir /<folder-name>
+```
+3. The command below is used to create a folder called **input** to store the dataset <br>
+```
+hdfs dfs -mkdir /<folder-name>/input
+```
+4. Add the json dataset file into the directory **input** which was created in the previous step.<br>
+```
+hdfs dfs -put <path-to-json-file> /<folder-name>/input
+```
+5. To verify if the JSON files was successfully added<br>
+```
+hdfs dfs -ls /<folder-name>/input
+```
+6. To run the code on the ***Hadoop HDFS***<br>
+```
+hadoop jar <path-to-streaming-jar-file> -input /<folder-name>/input -output /<folder-name>/output -file <path-to-mapper-file> <path-to-reducer-file> -mapper "python3 mapper.py <co-ordinate1> <co-ordinate2> <distance>" -reducer "python3 reducer.py"
+```
+7. Once executed, the output will be visible using the following command.<br>
+```
+hdfs dfs -cat /<folder-name>/output/part-00000
+```
+>_co-ordinate1, co-ordinate2_ and _distance_ are the command line arguments for the mapper file. <br>
