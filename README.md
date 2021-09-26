@@ -4,6 +4,8 @@ This is the first assignment of the Big Data Course. <br>
 The assignment involves the use of the ***Map Reduce*** framework of the ***Hadoop Ecosystem***. <br>
 The aim of this assignment was to read a data set and perform basic opertions using the ***Map Reduce*** framework. <br><br>
 
+Language used: PYTHON <br><br>
+
 Link to the dataset and problem statement: <br>
 [Big Data Assignment 1](https://drive.google.com/drive/folders/1oxwATscIyOc4vG_HYaAz1QpEItHcsREp) <br> <br>
 
